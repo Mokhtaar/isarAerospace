@@ -7,13 +7,11 @@ Source: https://sketchfab.com/3d-models/relativity-space-terran-1-b1a23b822e8a43
 Title: Relativity Space Terran 1
 */
 "use client";
-import * as THREE from "three";
-import React, { useEffect, useRef, useState } from "react";
+import React, { useRef } from "react";
 import { useGLTF } from "@react-three/drei";
 import { GLTF } from "three-stdlib";
 import { Common } from "./Common";
-import { CameraHelper, Group, Mesh, MeshStandardMaterial } from "three";
-import { useHelper } from "@react-three/drei";
+import { Group, Mesh, MeshStandardMaterial } from "three";
 import { useFrame } from "@react-three/fiber";
 import { SpectrumProps } from "@/types";
 
@@ -101,9 +99,7 @@ export function Rocket({ data }: { data: SpectrumProps }) {
     if (!ref.current) {
       return;
     }
-    if (
-      "isActionRequired" in data ? data.isActionRequired : data.IsActionRequired
-    ) {
+    if ("IsActionRequired" in data ? data.IsActionRequired : false) {
       const flashColor =
         state.clock.elapsedTime % 1 < 0.5 ? "#FF0000" : "white";
       materials["Material.001"].color.set(flashColor);

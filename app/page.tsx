@@ -21,7 +21,7 @@ export default function Home() {
     velocity: 0,
   });
   const alarmSound = useRef<HTMLAudioElement>(null);
-  const [isSoundEnabled, setIsSoundEnabled] = useState(false);
+  // const [isSoundEnabled, setIsSoundEnabled] = useState(false);
   const [lastUpdateTime, setLastUpdateTime] = useState(0);
 
   const getData = async () => {
@@ -36,16 +36,16 @@ export default function Home() {
     }
   };
 
-  useEffect(() => {
-    isSoundEnabled &&
-      data.isActionRequired &&
-      alarmSound.current &&
-      alarmSound.current.play();
+  // useEffect(() => {
+  //   isSoundEnabled &&
+  //     data.isActionRequired &&
+  //     alarmSound.current &&
+  //     alarmSound.current.play();
 
-    alarmSound.current &&
-      (!data.isActionRequired || !isSoundEnabled) &&
-      alarmSound.current.pause();
-  }, [data.isActionRequired, isSoundEnabled]);
+  //   alarmSound.current &&
+  //     (!data.isActionRequired || !isSoundEnabled) &&
+  //     alarmSound.current.pause();
+  // }, [data.isActionRequired, isSoundEnabled]);
 
   useEffect(() => {
     getData();
@@ -54,19 +54,18 @@ export default function Home() {
   return (
     <div className="relative w-screen h-screen overflow-hidden">
       <ThreeScene data={data} />
-      <audio loop ref={alarmSound} src="/alarm.mp3">
+      {/* <audio loop ref={alarmSound} src="/alarm.mp3">
         Your browser does not support the
         <code>audio</code> element.
-      </audio>
+      </audio> */}
       <main className="text-white">
         <Logo />
-        <div className="absolute top-5 right-5">
+        {/* <div className="absolute top-5 right-5">
           <ToggleButton
             isSoundEnabled={isSoundEnabled}
             setIsSoundEnabled={setIsSoundEnabled}
           />
-        </div>
-
+        </div> */}
         <div className="w-full absolute bottom-2 px-16">
           <div className="h-48 relative flex items-center justify-center border-t">
             <div className="h-full w-full items-center flex flex-col justify-between">
