@@ -1,5 +1,4 @@
 "use client";
-
 import { useFrame } from "@react-three/fiber";
 import React, { useRef, useState } from "react";
 import { Mesh } from "three";
@@ -11,6 +10,7 @@ export default function Stars(props: any) {
   const [sphere] = useState(() =>
     random.inSphere(new Float32Array(5000), { radius: 1.5 })
   );
+
   useFrame((state, delta) => {
     if (!ref.current) {
       return;
