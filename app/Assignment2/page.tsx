@@ -7,6 +7,7 @@ import ToggleButton from "../components/Switch";
 import Altitude from "../components/Altimeter";
 import { SpectrumLiveStatus } from "@/types";
 import TemperatureGauge from "../components/TemperatureGauge";
+import { motion } from "framer-motion";
 
 export default function Home() {
   const [data, setData] = useState<SpectrumLiveStatus>({

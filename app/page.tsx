@@ -9,6 +9,7 @@ import Logo from "./components/Logo";
 import Altitude from "./components/Altimeter";
 import { SpectrumStatus } from "@/types";
 import TemperatureGauge from "./components/TemperatureGauge";
+import { motion } from "framer-motion";
 
 export default function Home() {
   const [data, setData] = useState<SpectrumStatus>({
@@ -66,7 +67,7 @@ export default function Home() {
           />
         </div>
 
-        <div className="w-full absolute bottom-2 px-20">
+        <div className="w-full absolute bottom-2 px-16">
           <div className="h-48 relative flex items-center justify-center border-t">
             <div className="h-full w-full items-center flex flex-col justify-between">
               <VelocityGauge value={data.velocity} />
@@ -88,7 +89,6 @@ export default function Home() {
                 Temprature: {data.temperature.toFixed(4)}
               </p>
             </div>
-
             <div className="border-l">
               <button
                 type="button"

@@ -21,7 +21,7 @@ const UpdateTimeCounter = ({ lastUpdateTime }: { lastUpdateTime: number }) => {
     return () => clearInterval(intervalId);
   }, [lastUpdateTime]);
 
-  return <p className="text-sm ml-4 whitespace-nowrap">Last updated {formatTime()}</p>;
+  return <p className="text-xs ml-4 whitespace-nowrap">Last updated {formatTime()}</p>;
 };
 
 export default UpdateTimeCounter;
