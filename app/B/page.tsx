@@ -7,7 +7,6 @@ import ToggleButton from "../components/Switch";
 import Altitude from "../components/Altimeter";
 import { SpectrumLiveStatus } from "@/types";
 import TemperatureGauge from "../components/TemperatureGauge";
-import { motion } from "framer-motion";
 import Modal from "../components/Modal";
 
 export default function Home() {
