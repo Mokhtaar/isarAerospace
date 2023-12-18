@@ -113,7 +113,7 @@ export function Rocket({ data }: { data: SpectrumProps }) {
   });
 
   return (
-    <group ref={ref} position={[0, -0.28, 0]} scale={0.1} dispose={null}>
+    <group ref={ref} position={[0, -0.25, 0]} scale={0.1} dispose={null}>
       <Common />
       <group position={[0, 1.319, 0]} scale={0.343}>
         <mesh
