@@ -1,9 +1,8 @@
 "use client";
 import axios from "axios";
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useState } from "react";
 import ThreeScene from "./components/ThreeScene";
 import VelocityGauge from "./components/VelocityGauge";
-import ToggleButton from "./components/Switch";
 import UpdateTimeCounter from "./components/UpdateTimeCounter";
 import Logo from "./components/Logo";
 import Altitude from "./components/Altimeter";
@@ -20,8 +19,6 @@ export default function Home() {
     temperature: 0,
     velocity: 0,
   });
-  const alarmSound = useRef<HTMLAudioElement>(null);
-  // const [isSoundEnabled, setIsSoundEnabled] = useState(false);
   const [lastUpdateTime, setLastUpdateTime] = useState(0);
 
   const getData = async () => {
@@ -36,17 +33,6 @@ export default function Home() {
     }
   };
 
-  // useEffect(() => {
-  //   isSoundEnabled &&
-  //     data.isActionRequired &&
-  //     alarmSound.current &&
-  //     alarmSound.current.play();
-
-  //   alarmSound.current &&
-  //     (!data.isActionRequired || !isSoundEnabled) &&
-  //     alarmSound.current.pause();
-  // }, [data.isActionRequired, isSoundEnabled]);
-
   useEffect(() => {
     getData();
   }, []);
@@ -54,20 +40,10 @@ export default function Home() {
   return (
     <div className="relative w-screen h-screen overflow-hidden">
       <ThreeScene data={data} />
-      {/* <audio loop ref={alarmSound} src="/alarm.mp3">
-        Your browser does not support the
-        <code>audio</code> element.
-      </audio> */}
       <main className="text-white">
         <Logo />
-        {/* <div className="absolute top-5 right-5">
-          <ToggleButton
-            isSoundEnabled={isSoundEnabled}
-            setIsSoundEnabled={setIsSoundEnabled}
-          />
-        </div> */}
-        <div className="w-full absolute bottom-2 px-16">
-          <div className="h-48 relative flex items-center justify-center border-t">
+        <div className="w-full absolute bottom-3 px-16">
+          <div className="h-52 relative flex items-center justify-center border-t">
             <div className="h-full w-full items-center flex flex-col justify-between">
               <VelocityGauge value={data.velocity} />
               <p className="text-center border-t-2">
@@ -89,13 +65,15 @@ export default function Home() {
               </p>
             </div>
             <div className="border-l">
-              <button
+              <motion.button
                 type="button"
                 onClick={() => getData()}
-                className="rounded-md ml-4 mb-2 divide-none bg-transparent whitespace-nowrap px-3 py-2 text-base font-semibold text-white shadow-sm ring-1 ring-inset ring-gray-300 "
+                whileHover={{ scale: 1.05 }}
+                whileTap={{ scale: 0.95 }}
+                className="rounded-md ml-4 mb-2 divide-none bg-transparent whitespace-nowrap px-3 py-2 text-base font-semibold text-white shadow-sm ring-1 ring-inset ring-gray-300 hover:text-gray-300 "
               >
                 Update data
-              </button>
+              </motion.button>
               <UpdateTimeCounter lastUpdateTime={lastUpdateTime} />
             </div>
           </div>

@@ -30,7 +30,7 @@ const ThreeScene = ({ data }: { data: SpectrumProps }) => {
         maxAzimuthAngle={Math.PI / 4}
         minPolarAngle={Math.PI / 6}
         maxPolarAngle={Math.PI - Math.PI / 6}
-        enableZoom={true}
+        enableZoom={false}
       />
       <Rocket data={data} />
       <Html
@@ -57,6 +57,18 @@ const ThreeScene = ({ data }: { data: SpectrumProps }) => {
           : data.IsAscending
           ? "Spectrum is ascending"
           : "Spectrum is descending"}
+      </Html>
+      <Html
+        occlude
+        distanceFactor={1.5}
+        position={[0.1, 0.05, 0]}
+        className="px-3 py-2 text-xs text-white font-mono rounded-lg whitespace-nowrap bg-transparent"
+      >
+        {"isActionRequired" in data
+          ? data.isActionRequired
+            ? "An action must be taken"
+            : "There's no action required"
+          : ""}
       </Html>
       {/* <CameraHelper /> */}
     </Canvas>

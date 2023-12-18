@@ -104,6 +104,7 @@ export function Rocket({ data }: { data: SpectrumProps }) {
         state.clock.elapsedTime % 1 < 0.5 ? "#FF0000" : "white";
       materials["Material.001"].color.set(flashColor);
       materials["Material.010"].color.set(flashColor);
+      ref.current.rotation.y += delta * 6;
     } else {
       materials["Material.001"].color.set("white");
       materials["Material.010"].color.set("white");
@@ -112,7 +113,7 @@ export function Rocket({ data }: { data: SpectrumProps }) {
   });
 
   return (
-    <group ref={ref} position={[0, -0.3, 0]} scale={0.1} dispose={null}>
+    <group ref={ref} position={[0, -0.28, 0]} scale={0.1} dispose={null}>
       <Common />
       <group position={[0, 1.319, 0]} scale={0.343}>
         <mesh

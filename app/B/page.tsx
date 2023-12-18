@@ -8,6 +8,7 @@ import Altitude from "../components/Altimeter";
 import { SpectrumLiveStatus } from "@/types";
 import TemperatureGauge from "../components/TemperatureGauge";
 import { motion } from "framer-motion";
+import Modal from "../components/Modal";
 
 export default function Home() {
   const [data, setData] = useState<SpectrumLiveStatus>({
@@ -22,9 +23,9 @@ export default function Home() {
   const [isSoundEnabled, setIsSoundEnabled] = useState(false);
 
   useEffect(() => {
-    isSoundEnabled &&
+    alarmSound.current &&
+      isSoundEnabled &&
       data.IsActionRequired &&
-      alarmSound.current &&
       alarmSound.current.play();
 
     alarmSound.current &&
@@ -32,7 +33,7 @@ export default function Home() {
       alarmSound.current.pause();
   }, [data.IsActionRequired, isSoundEnabled]);
 
-  useEffect(() => {
+  const socketConnect = () => {
     const socket = new WebSocket(
       "wss://webfrontendassignment-isaraerospace.azurewebsites.net/api/SpectrumWS"
     );
@@ -47,14 +48,18 @@ export default function Home() {
 
     socket.onclose = () => {
       console.log("WebSocket closed");
+      setTimeout(function () {
+        socketConnect();
+      }, 1000);
     };
 
     socket.onerror = (error) => {
       console.error("WebSocket error:", error);
     };
-    return () => {
-      socket.close();
-    };
+  };
+
+  useEffect(() => {
+    socketConnect();
   }, []);
 
   return (
@@ -72,6 +77,7 @@ export default function Home() {
             setIsSoundEnabled={setIsSoundEnabled}
           />
         </div>
+        <Modal IsActionRequired={data.IsActionRequired} />
         <div className="w-full absolute bottom-2 px-20">
           <div className="h-48 relative flex items-center justify-center border-t">
             <div className="h-full w-full items-center flex flex-col justify-between">
